@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FocusFlow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+
+<header class="bg-white shadow-sm px-6 py-4 sticky top-0 z-10">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-gradient-to-br from-red-700 to-red-600 rounded-full flex items-center justify-center glow-effect">
+        <span class="text-white font-bold text-lg">🕮</span>
+      </div>
+      <span class="text-xl font-bold text-gray-900">FocusFlow</span>
+    </div>
+
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="text-red-700 font-medium border-b-2 border-red-700 pb-1">Home</a>
+      <a href="features.html" class="text-gray-600 hover:text-red-700 transition">Features</a>
+      <a href="how.html" class="text-gray-600 hover:text-red-700 transition">How It Works</a>
+      <a href="about.html" class="text-gray-600 hover:text-red-700 transition">About</a>
+    </nav>
+
+    <button class="bg-gray-100 hover:bg-gray-200 text-gray-800 px-5 py-2 rounded-full font-medium transition">
+      Log in
+    </button>
+  </div>
+</header>
+
+<section class="bg-gradient-to-b from-gray-50 to-white py-20 px-4">
+  <div class="max-w-6xl mx-auto text-center">
+    
+    <div class="inline-block bg-red-50 text-red-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+      STUDENT PRODUCTIVITY DASHBOARD
+    </div>
+    
+    
+    <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text leading-tight">
+      Turn your new tab<br>into a study control center
+    </h1>
+    
+    
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-12 leading-relaxed">
+      FocusFlow brings tasks, timers, and your daily schedule into one distraction-free page, right in your browser.
+    </p>
+    
+    
+    <div class="mb-16">
+      <a href="app.html" class="inline-block bg-red-700 hover:bg-red-800 text-white px-10 py-4 rounded-xl font-medium text-lg transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+        Try FocusFlow Now
+      </a>
+      <p class="text-gray-500 text-sm mt-3">No signup required • Works instantly</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="max-w-5xl mx-auto px-4 mb-24">
+  <div class="text-center mb-10">
+    <h2 class="text-3xl font-bold text-gray-900 mb-4">See Your Study Progress at a Glance</h2>
+    <p class="text-gray-600 max-w-2xl mx-auto">Real-time analytics help you stay on track with your study goals</p>
+  </div>
+  
+  <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+   
+    <div class="bg-gradient-to-r from-gray-900 to-gray-800 h-12 flex items-center px-6">
+      <div class="flex gap-2">
+        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+      </div>
+      <span class="text-gray-300 text-sm ml-4">FocusFlow Analytics Dashboard</span>
+    </div>
+    
+    
+    <div class="p-8">
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+        <div class="bg-gradient-to-br from-red-50 to-pink-50 p-5 rounded-xl text-center border border-red-100 shadow-sm">
+          <div class="text-3xl font-bold text-gray-900 mb-2">12.5</div>
+          <div class="text-gray-600 text-sm">Hours Focused</div>
+        </div>
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl text-center border border-blue-100 shadow-sm">
+          <div class="text-3xl font-bold text-gray-900 mb-2">87%</div>
+          <div class="text-gray-600 text-sm">Task Completion</div>
+        </div>
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-xl text-center border border-green-100 shadow-sm">
+          <div class="text-3xl font-bold text-gray-900 mb-2">24</div>
+          <div class="text-gray-600 text-sm">Sessions Completed</div>
+        </div>
+        <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-5 rounded-xl text-center border border-purple-100 shadow-sm">
+          <div class="text-3xl font-bold text-gray-900 mb-2">7</div>
+          <div class="text-gray-600 text-sm">Day Streak</div>
+        </div>
+      </div>
+      
+      
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        
+        <div class="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200 shadow-sm">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-lg font-bold text-gray-900">Weekly Progress</h3>
+            <span class="text-sm text-green-600 font-medium bg-green-50 px-3 py-1 rounded-full">+12% from last week</span>
+          </div>
+          
+          <div class="chart-grid mb-6">
+       
+        <div class="chart-day">
+          <div class="chart-value">90%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 90%;"></div>
+          </div>
+          <div class="chart-day-label">Mon</div>
+        </div>
+        
+       
+        <div class="chart-day">
+          <div class="chart-value">75%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 75%;"></div>
+          </div>
+          <div class="chart-day-label">Tue</div>
+        </div>
+        
+        
+        <div class="chart-day">
+          <div class="chart-value">95%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 95%;"></div>
+          </div>
+          <div class="chart-day-label">Wed</div>
+        </div>
+        
+        
+        <div class="chart-day">
+          <div class="chart-value">85%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 85%;"></div>
+          </div>
+          <div class="chart-day-label">Thu</div>
+        </div>
+        
+        
+        <div class="chart-day">
+          <div class="chart-value">70%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 70%;"></div>
+          </div>
+          <div class="chart-day-label">Fri</div>
+        </div>
+        
+        
+        <div class="chart-day">
+          <div class="chart-value">60%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 60%;"></div>
+          </div>
+          <div class="chart-day-label">Sat</div>
+        </div>
+        
+       
+        <div class="chart-day">
+          <div class="chart-value">80%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 80%;"></div>
+          </div>
+          <div class="chart-day-label">Sun</div>
+        </div>
+      </div>
+            
+            
+            <div class="flex justify-between text-xs text-gray-500 px-2">
+              <span>100%</span>
+              <span>75%</span>
+              <span>50%</span>
+              <span>25%</span>
+              <span>0%</span>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div class="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200 shadow-sm">
+          <h3 class="text-lg font-bold text-gray-900 mb-6">Focus Distribution</h3>
+          
+          <div class="flex flex-col md:flex-row items-center justify-between">
+            
+            <div class="relative w-48 h-48 mb-6 md:mb-0">
+              
+              <div class="absolute inset-0 rounded-full border-8 border-gray-100"></div>
+              
+              
+              <div class="absolute inset-0 rounded-full"
+                   style="background: conic-gradient(
+                     #dc2626 0% 65%, 
+                     #f87171 65% 90%,
+                     #fca5a5 90% 100%
+                   );">
+                <div class="absolute inset-8 bg-white rounded-full"></div>
+              </div>
+              
+              
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center">
+                  <div class="text-3xl font-bold text-gray-900">65%</div>
+                  <div class="text-sm text-gray-600">Productive</div>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-4 h-4 rounded-full bg-red-600"></div>
+                <div>
+                  <div class="text-sm font-medium text-gray-900">Productive Focus</div>
+                  <div class="text-xs text-gray-600">65% • 8.1 hours</div>
+                </div>
+              </div>
+              
+              <div class="flex items-center gap-3">
+                <div class="w-4 h-4 rounded-full bg-red-400"></div>
+                <div>
+                  <div class="text-sm font-medium text-gray-900">Medium Focus</div>
+                  <div class="text-xs text-gray-600">25% • 3.1 hours</div>
+                </div>
+              </div>
+              
+              <div class="flex items-center gap-3">
+                <div class="w-4 h-4 rounded-full bg-red-200"></div>
+                <div>
+                  <div class="text-sm font-medium text-gray-900">Distracted</div>
+                  <div class="text-xs text-gray-600">10% • 1.2 hours</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="mt-8 bg-gradient-to-r from-red-50 to-pink-50 p-6 rounded-xl border border-red-100 shadow-sm">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Productivity Insights</h3>
+        <div class="grid md:grid-cols-3 gap-6 text-center">
+          <div class="bg-white p-4 rounded-lg border border-red-100">
+            <div class="text-2xl font-bold text-gray-900 mb-1">2.3x</div>
+            <div class="text-gray-600 text-sm">More productive than average</div>
+            <div class="text-xs text-green-600 mt-1 font-medium">↑ 15% from last month</div>
+          </div>
+          <div class="bg-white p-4 rounded-lg border border-red-100">
+            <div class="text-2xl font-bold text-gray-900 mb-1">42 min</div>
+            <div class="text-gray-600 text-sm">Average session length</div>
+            <div class="text-xs text-green-600 mt-1 font-medium">↑ 8 min longer</div>
+          </div>
+          <div class="bg-white p-4 rounded-lg border border-red-100">
+            <div class="text-2xl font-bold text-gray-900 mb-1">8%</div>
+            <div class="text-gray-600 text-sm">Distraction rate decrease</div>
+            <div class="text-xs text-green-600 mt-1 font-medium">↓ 3% this week</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="max-w-6xl mx-auto px-4 mb-24">
+  <div class="text-center mb-12">
+    <h2 class="text-3xl font-bold text-gray-900 mb-4">Everything You Need to Study Better</h2>
+    <p class="text-gray-600 max-w-2xl mx-auto">Powerful tools designed specifically for students</p>
+  </div>
+  
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+    
+    <div class="feature-card bg-white p-6 rounded-xl border border-gray-200 text-center">
+      <div class="text-4xl mb-4">⏱️</div>
+      <h3 class="text-xl font-bold text-gray-900 mb-3">Study Timer</h3>
+      <p class="text-gray-600">Pomodoro-style timer with customizable work/break intervals</p>
+    </div>
+    
+    
+    <div class="feature-card bg-white p-6 rounded-xl border border-gray-200 text-center">
+      <div class="text-4xl mb-4">📝</div>
+      <h3 class="text-xl font-bold text-gray-900 mb-3">Distraction Logger</h3>
+      <p class="text-gray-600">Track interruptions and improve your focus over time</p>
+    </div>
+    
+    
+    <div class="feature-card bg-white p-6 rounded-xl border border-gray-200 text-center">
+      <div class="text-4xl mb-4">📊</div>
+      <h3 class="text-xl font-bold text-gray-900 mb-3">Smart Analytics</h3>
+      <p class="text-gray-600">Visual insights into your study habits and progress</p>
+    </div>
+    
+    
+    <div class="feature-card bg-white p-6 rounded-xl border border-gray-200 text-center">
+      <div class="text-4xl mb-4">🔒</div>
+      <h3 class="text-xl font-bold text-gray-900 mb-3">100% Private</h3>
+      <p class="text-gray-600">All data stays on your device. No accounts needed.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="max-w-6xl mx-auto px-4 mb-24">
+  <div class="grid lg:grid-cols-2 gap-12">
+    
+    <div>
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">How It Helps You Study Better</h2>
+      <p class="text-gray-600 text-lg mb-8">Simple visual insights to help you improve your habits.</p>
+      
+      <div class="space-y-8">
+        
+        <div class="flex gap-4 p-4 bg-white rounded-xl border border-gray-100">
+          <div class="flex-shrink-0">
+            <div class="w-12 h-12 bg-red-700 text-white rounded-full flex items-center justify-center font-bold text-lg">
+              1
+            </div>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold text-gray-900 mb-2">Start a Focus Session</h4>
+            <p class="text-gray-600">Set your timer and begin studying with zero distractions.</p>
+          </div>
+        </div>
+        
+        
+        <div class="flex gap-4 p-4 bg-white rounded-xl border border-gray-100">
+          <div class="flex-shrink-0">
+            <div class="w-12 h-12 bg-red-700 text-white rounded-full flex items-center justify-center font-bold text-lg">
+              2
+            </div>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold text-gray-900 mb-2">Track Your Progress</h4>
+            <p class="text-gray-600">Watch your analytics update in real-time as you study.</p>
+          </div>
+        </div>
+        
+        
+        <div class="flex gap-4 p-4 bg-white rounded-xl border border-gray-100">
+          <div class="flex-shrink-0">
+            <div class="w-12 h-12 bg-red-700 text-white rounded-full flex items-center justify-center font-bold text-lg">
+              3
+            </div>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold text-gray-900 mb-2">Improve Over Time</h4>
+            <p class="text-gray-600">Use insights to build better study habits each week.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-xl border border-gray-200 shadow-sm">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold text-gray-900">This Week's Performance</h3>
+        <span class="text-sm font-medium px-3 py-1 rounded-full bg-green-50 text-green-700">Trending Up</span>
+      </div>
+      
+      
+      <div class="chart-grid mb-6">
+        
+        <div class="chart-day">
+          <div class="chart-value">90%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 90%;"></div>
+          </div>
+          <div class="chart-day-label">Mon</div>
+        </div>
+        
+        
+        <div class="chart-day">
+          <div class="chart-value">75%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 75%;"></div>
+          </div>
+          <div class="chart-day-label">Tue</div>
+        </div>
+        
+        
+        <div class="chart-day">
+          <div class="chart-value">95%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 95%;"></div>
+          </div>
+          <div class="chart-day-label">Wed</div>
+        </div>
+        
+        
+        <div class="chart-day">
+          <div class="chart-value">85%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 85%;"></div>
+          </div>
+          <div class="chart-day-label">Thu</div>
+        </div>
+        
+        
+        <div class="chart-day">
+          <div class="chart-value">70%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 70%;"></div>
+          </div>
+          <div class="chart-day-label">Fri</div>
+        </div>
+        
+        
+        <div class="chart-day">
+          <div class="chart-value">60%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 60%;"></div>
+          </div>
+          <div class="chart-day-label">Sat</div>
+        </div>
+        
+       
+        <div class="chart-day">
+          <div class="chart-value">80%</div>
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-progress" style="height: 80%;"></div>
+          </div>
+          <div class="chart-day-label">Sun</div>
+        </div>
+      </div>
+      
+      
+      <div class="flex items-center justify-center gap-4 text-sm mb-6">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-red-600"></div>
+          <span class="text-gray-600">Focus Level</span>
+        </div>
+        <div class="text-gray-400">|</div>
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-green-500"></div>
+          <span class="text-gray-600">Weekly Average: 79%</span>
+        </div>
+      </div>
+      
+      
+      <div class="grid grid-cols-3 gap-4 text-center border-t border-gray-100 pt-6">
+        <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
+          <div class="text-2xl font-bold text-gray-900">87%</div>
+          <div class="text-gray-600 text-sm">Avg. Focus</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
+          <div class="text-2xl font-bold text-green-600">+12%</div>
+          <div class="text-gray-600 text-sm">vs Last Week</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
+          <div class="text-2xl font-bold text-gray-900">4.2</div>
+          <div class="text-gray-600 text-sm">Hours/Day</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="bg-gradient-to-r from-red-700 to-red-600 text-white py-16 px-4 mb-12">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-6">Ready to Transform Your Study Habits?</h2>
+    <p class="text-red-100 text-lg mb-8 max-w-2xl mx-auto">
+      Join thousands of students who use FocusFlow to stay productive and achieve their academic goals.
+    </p>
+    <a href="app.html" class="inline-block bg-white text-red-700 hover:bg-gray-100 px-10 py-4 rounded-xl font-bold text-lg transition shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+      Start Studying Smarter Now →
+    </a>
+    <p class="text-red-200 text-sm mt-4">Free forever • No installation required</p>
+  </div>
+</section>
+
+
+<footer class="bg-white border-t border-gray-200 py-10">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-red-700 to-red-600 rounded-full flex items-center justify-center">
+          <span class="text-white font-bold text-lg">FF</span>
+        </div>
+        <span class="text-xl font-bold text-gray-900">FocusFlow</span>
+      </div>
+      
+      <div class="text-center text-gray-600">
+        © 2025 FocusFlow. The student productivity dashboard.<br>
+        <span class="text-sm">All data stays on your device. Privacy guaranteed.</span>
+      </div>
+      
+      <div class="flex gap-6">
+        <a href="features.html" class="text-gray-600 hover:text-red-700 transition">Features</a>
+        <a href="how.html" class="text-gray-600 hover:text-red-700 transition">How It Works</a>
+        <a href="about.html" class="text-gray-600 hover:text-red-700 transition">About</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

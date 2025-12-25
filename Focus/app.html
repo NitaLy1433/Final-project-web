@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FocusFlow App</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body { font-family: 'Roboto', sans-serif; }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #b61c1c;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    .chart-container {
+      position: relative;
+      height: 200px;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+
+
+<header class="bg-white shadow-sm px-6 py-4 flex justify-between items-center sticky top-0 z-10">
+  <div class="flex items-center gap-2 font-bold text-lg">
+    <div class="w-10 h-10 bg-red-700 text-white flex items-center justify-center rounded-full">📖</div>
+    FocusFlow
+  </div>
+  <div class="flex items-center gap-4">
+    <span id="currentTime" class="text-sm text-gray-600"></span>
+    <a href="index.html" class="text-sm text-red-700 hover:text-red-800 font-medium px-3 py-1 rounded-lg hover:bg-red-50 transition">Exit App</a>
+  </div>
+</header>
+
+
+<main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+  
+ 
+  <section class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-semibold text-gray-800">📝 Today's Tasks</h2>
+      <span class="text-sm text-gray-500" id="todayDate"></span>
+    </div>
+
+    <div id="taskList" class="space-y-3 mb-6"></div>
+
+    
+    <div class="mb-6">
+      <div class="flex justify-between text-sm mb-2">
+        <span class="text-gray-600">Progress</span>
+        <span id="progressPercentage" class="font-medium text-red-700">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+
+    
+    <div class="flex gap-2">
+      <input id="taskInput" type="text" placeholder="Add a new task..."
+        class="flex-1 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+      <button onclick="addTask()" class="bg-red-700 hover:bg-red-800 text-white px-4 py-3 rounded-lg font-medium transition">
+        Add
+      </button>
+    </div>
+  </section>
+
+    <section class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center">
+        <h2 class="text-xl font-semibold text-gray-800 mb-6">⏱ Focus Timer</h2>
+
+       
+        <div class="relative mb-6">
+        <div id="timerDisplay"
+            class="w-40 h-40 mx-auto rounded-full border-8 border-red-100 flex items-center justify-center text-3xl font-bold text-gray-800 mb-4">
+            25:00
+        </div>
+        <div class="text-sm text-gray-500 mt-2" id="timerStatus">Ready to focus</div>
+        </div>
+
+        
+        <div class="flex justify-center gap-3">
+        <button onclick="startTimer()" id="startBtn" 
+            class="bg-red-700 hover:bg-red-800 text-white px-6 py-2 rounded-lg font-medium transition">
+            Start
+        </button>
+        <button onclick="pauseTimer()" id="pauseBtn" 
+            class="bg-gray-200 hover:bg-gray-300 px-6 py-2 rounded-lg font-medium transition" disabled>
+            Pause
+        </button>
+        <button onclick="resetTimer()" 
+            class="bg-gray-100 hover:bg-gray-200 px-6 py-2 rounded-lg font-medium transition">
+            Reset
+        </button>
+        </div>
+
+       
+        <div class="flex justify-center gap-3 mt-6">
+            <button onclick="setTimer(25)" class="px-4 py-2 text-sm bg-red-50 text-red-700 rounded-lg">25 min</button>
+            <button onclick="setTimer(50)" class="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg">50 min</button>
+            <button onclick="setTimer(5)" class="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg">5 min</button>
+        </div>
+    </section>
+
+  
+  <section class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+    <h2 class="text-xl font-semibold text-gray-800 mb-6">📊 Analytics Dashboard</h2>
+
+    
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+        <div class="text-sm text-gray-600 mb-1">✅ Tasks Completed</div>
+        <div class="text-2xl font-bold text-red-700" id="completedCount">0</div>
+      </div>
+      <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+        <div class="text-sm text-gray-600 mb-1">⏱ Focus Sessions</div>
+        <div class="text-2xl font-bold text-blue-700" id="sessionCount">0</div>
+      </div>
+      <div class="bg-green-50 p-4 rounded-xl border border-green-100">
+        <div class="text-sm text-gray-600 mb-1">🎯 Completion Rate</div>
+        <div class="text-2xl font-bold text-green-700" id="completionRate">0%</div>
+      </div>
+      <div class="bg-purple-50 p-4 rounded-xl border border-purple-100">
+        <div class="text-sm text-gray-600 mb-1">🔥 Streak</div>
+        <div class="text-2xl font-bold text-purple-700" id="streakCount">0 days</div>
+      </div>
+    </div>
+
+   
+    <div class="mb-6">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-medium text-gray-700">Weekly Progress</h3>
+        <div class="text-sm text-gray-500" id="weekRange"></div>
+      </div>
+      <div class="chart-container">
+        <canvas id="progressChart"></canvas>
+      </div>
+    </div>
+
+   
+    <div>
+      <h3 class="font-medium text-gray-700 mb-3">Recent Sessions</h3>
+      <div id="sessionHistory" class="space-y-2 text-sm">
+        <div class="text-gray-500 text-center py-4">No sessions yet. Start your first timer!</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<div class="max-w-7xl mx-auto px-6 pb-6">
+  <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center gap-6">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-gray-800" id="totalFocusTime">0</div>
+          <div class="text-xs text-gray-500">Total Focus (min)</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-gray-800" id="avgFocusTime">0</div>
+          <div class="text-xs text-gray-500">Avg Session</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-gray-800" id="productivityScore">0</div>
+          <div class="text-xs text-gray-500">Productivity Score</div>
+        </div>
+      </div>
+      <button onclick="exportData()" class="text-sm text-gray-600 hover:text-gray-800 px-3 py-1 border rounded-lg">
+        📥 Export Data
+      </button>
+    </div>
+  </div>
+</div>
+
+<footer class="text-center text-sm text-gray-500 py-6 mt-6">
+  © 2025 FocusFlow • All data stored locally on your device
+</footer>
+
+
+<script>
+
+const today = new Date().toISOString().split("T")[0];
+let chartInstance = null;
+
+
+let analytics = JSON.parse(localStorage.getItem("analytics")) || {};
+if (!analytics[today]) {
+  analytics[today] = { 
+    tasks: 0, 
+    sessions: 0,
+    focusTime: 0,
+    sessionHistory: []
+  };
+}
+
+
+function updateDateTime() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    hour12: true 
+  });
+  const dateString = now.toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+  
+  document.getElementById('currentTime').textContent = timeString;
+  document.getElementById('todayDate').textContent = dateString;
+}
+
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+function renderTasks() {
+  const list = document.getElementById("taskList");
+  list.innerHTML = "";
+
+  if (tasks.length === 0) {
+    list.innerHTML = `
+      <div class="text-center py-8 text-gray-400">
+        <div class="text-4xl mb-2">📝</div>
+        <p>No tasks yet. Add your first task!</p>
+      </div>`;
+  } else {
+    tasks.forEach((task, index) => {
+      const item = document.createElement("div");
+      item.className = "flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition";
+      
+      item.innerHTML = `
+        <input type="checkbox" ${task.done ? "checked" : ""}
+          onchange="toggleTask(${index})" 
+          class="w-5 h-5 accent-red-700 cursor-pointer">
+        <span class="flex-1 ${task.done ? "line-through text-gray-400" : "text-gray-700"}">
+          ${task.text}
+        </span>
+        <button onclick="removeTask(${index})" class="text-gray-400 hover:text-red-700">
+          ✕
+        </button>
+      `;
+      list.appendChild(item);
+    });
+  }
+
+  updateProgress();
+  saveTasks();
+}
+
+function addTask() {
+  const input = document.getElementById("taskInput");
+  const text = input.value.trim();
+  
+  if (!text) {
+    input.focus();
+    return;
+  }
+
+  tasks.push({ text, done: false, createdAt: new Date().toISOString() });
+  input.value = "";
+  renderTasks();
+  updateAnalytics();
+}
+
+function toggleTask(index) {
+  tasks[index].done = !tasks[index].done;
+  tasks[index].completedAt = tasks[index].done ? new Date().toISOString() : undefined;
+  renderTasks();
+  updateAnalytics();
+}
+
+function removeTask(index) {
+  if (confirm("Delete this task?")) {
+    tasks.splice(index, 1);
+    renderTasks();
+    updateAnalytics();
+  }
+}
+
+function updateProgress() {
+  const completed = tasks.filter(t => t.done).length;
+  const total = tasks.length;
+  const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+  
+  document.getElementById("progressPercentage").textContent = `${percentage}%`;
+  document.getElementById("progressFill").style.width = `${percentage}%`;
+  document.getElementById("completedCount").textContent = completed;
+  
+  
+  const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
+  document.getElementById("completionRate").textContent = `${completionRate}%`;
+}
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+
+let time = 25 * 60;
+let timerInterval = null;
+let isRunning = false;
+let originalTime = 25 * 60;
+
+function updateTimerDisplay() {
+  const m = String(Math.floor(time / 60)).padStart(2, "0");
+  const s = String(time % 60).padStart(2, "0");
+  document.getElementById("timerDisplay").textContent = `${m}:${s}`;
+}
+
+function setTimer(minutes) {
+  if (isRunning && !confirm("Timer is running. Reset to change duration?")) {
+    return;
+  }
+  
+  pauseTimer();
+  originalTime = minutes * 60;
+  time = minutes * 60;
+  updateTimerDisplay();
+  
+ 
+  document.getElementById("timerStatus").textContent = `Set to ${minutes} minutes`;
+  
+  
+  document.querySelectorAll('[onclick^="setTimer"]').forEach(btn => {
+    btn.classList.remove('bg-red-50', 'text-red-700');
+    btn.classList.add('bg-gray-100', 'text-gray-700');
+  });
+  event.target.classList.add('bg-red-50', 'text-red-700');
+}
+
+function startTimer() {
+  if (timerInterval) {
+    pauseTimer();
+    return;
+  }
+  
+  isRunning = true;
+  document.getElementById("startBtn").disabled = true;
+  document.getElementById("pauseBtn").disabled = false;
+  document.getElementById("timerStatus").textContent = "Focusing...";
+  document.getElementById("timerDisplay").classList.add("text-red-700", "animate-pulse");
+  
+  timerInterval = setInterval(() => {
+    if (time > 0) {
+      time--;
+      updateTimerDisplay();
+      
+     
+      if (time === 60) {
+        document.getElementById("timerStatus").textContent = "1 minute left!";
+      }
+    } else {
+      completeSession();
+    }
+  }, 1000);
+}
+
+function pauseTimer() {
+  if (!timerInterval) return;
+  
+  clearInterval(timerInterval);
+  timerInterval = null;
+  isRunning = false;
+  document.getElementById("startBtn").disabled = false;
+  document.getElementById("pauseBtn").disabled = true;
+  document.getElementById("timerStatus").textContent = "Paused";
+  document.getElementById("timerDisplay").classList.remove("text-red-700", "animate-pulse");
+}
+
+function resetTimer() {
+  pauseTimer();
+  time = originalTime;
+  updateTimerDisplay();
+  document.getElementById("timerStatus").textContent = "Ready to focus";
+  document.getElementById("timerDisplay").classList.remove("text-red-700", "animate-pulse");
+}
+
+function completeSession() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  isRunning = false;
+  
+  
+  try {
+    const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3');
+    audio.volume = 0.3;
+    audio.play();
+  } catch (e) {
+    
+  }
+  
+  
+  if (!analytics[today]) {
+    analytics[today] = { 
+      tasks: 0, 
+      sessions: 0,
+      focusTime: 0,
+      sessionHistory: []
+    };
+  }
+  
+  analytics[today].sessions = (analytics[today].sessions || 0) + 1;
+  analytics[today].focusTime = (analytics[today].focusTime || 0) + (originalTime / 60);
+  
+ 
+  if (!analytics[today].sessionHistory) {
+    analytics[today].sessionHistory = [];
+  }
+  
+  analytics[today].sessionHistory.push({
+    duration: originalTime / 60,
+    completedAt: new Date().toISOString()
+  });
+  
+  
+  saveAnalytics();
+  
+ 
+  time = originalTime;
+  updateTimerDisplay();
+  
+ 
+  document.getElementById("startBtn").disabled = false;
+  document.getElementById("pauseBtn").disabled = true;
+  document.getElementById("timerStatus").textContent = "Session completed! 🎉";
+  document.getElementById("timerDisplay").classList.remove("text-red-700", "animate-pulse");
+  document.getElementById("timerDisplay").classList.add("text-green-600");
+  
+ 
+  updateAnalytics();
+  renderSessionHistory();
+  
+  
+  setTimeout(() => {
+    alert(`Great job! You completed a ${originalTime / 60}-minute focus session.`);
+    document.getElementById("timerDisplay").classList.remove("text-green-600");
+  }, 100);
+  
+  
+  if ("Notification" in window && Notification.permission === "granted") {
+    new Notification("FocusFlow - Session Complete!", {
+      body: `You finished a ${originalTime / 60}-minute focus session. Great work!`,
+      icon: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+    });
+  } else if ("Notification" in window && Notification.permission === "default") {
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        new Notification("FocusFlow - Session Complete!", {
+          body: `You finished a ${originalTime / 60}-minute focus session. Great work!`,
+          icon: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+        });
+      }
+    });
+  }
+}
+
+
+function updateAnalytics() {
+  const completed = tasks.filter(t => t.done).length;
+  analytics[today].tasks = completed;
+  
+ 
+  document.getElementById("sessionCount").textContent = analytics[today].sessions;
+  
+  
+  const streak = calculateStreak();
+  document.getElementById("streakCount").textContent = `${streak} day${streak !== 1 ? 's' : ''}`;
+  
+  
+  const totalFocus = Object.values(analytics).reduce((sum, day) => sum + (day.focusTime || 0), 0);
+  document.getElementById("totalFocusTime").textContent = totalFocus;
+  
+  
+  const totalSessions = Object.values(analytics).reduce((sum, day) => sum + (day.sessions || 0), 0);
+  const avgFocus = totalSessions > 0 ? Math.round(totalFocus / totalSessions) : 0;
+  document.getElementById("avgFocusTime").textContent = avgFocus;
+  
+  
+  const productivityScore = Math.min(100, Math.round(
+    (completed * 10) + 
+    (analytics[today].sessions * 15) + 
+    (streak * 5)
+  ));
+  document.getElementById("productivityScore").textContent = productivityScore;
+  
+  saveAnalytics();
+  renderChart();
+}
+
+function calculateStreak() {
+  const dates = Object.keys(analytics).sort();
+  let streak = 0;
+  let currentDate = new Date();
+  
+  for (let i = 0; i < 365; i++) { 
+    const dateStr = currentDate.toISOString().split("T")[0];
+    
+    if (analytics[dateStr] && analytics[dateStr].sessions > 0) {
+      streak++;
+    } else if (dates.includes(dateStr)) {
+      break;
+    }
+    
+    currentDate.setDate(currentDate.getDate() - 1);
+  }
+  
+  return streak;
+}
+
+function saveAnalytics() {
+  localStorage.setItem("analytics", JSON.stringify(analytics));
+}
+
+function renderChart() {
+  const ctx = document.getElementById('progressChart').getContext('2d');
+  
+ 
+  const dates = [];
+  const taskData = [];
+  const sessionData = [];
+  
+  for (let i = 6; i >= 0; i--) {
+    const date = new Date();
+    date.setDate(date.getDate() - i);
+    const dateStr = date.toISOString().split("T")[0];
+    dates.push(date.toLocaleDateString('en-US', { weekday: 'short' }));
+    
+    if (analytics[dateStr]) {
+      taskData.push(analytics[dateStr].tasks || 0);
+      sessionData.push(analytics[dateStr].sessions || 0);
+    } else {
+      taskData.push(0);
+      sessionData.push(0);
+    }
+  }
+  
+  
+  const firstDate = new Date();
+  firstDate.setDate(firstDate.getDate() - 6);
+  const weekRange = `${firstDate.getDate()} ${firstDate.toLocaleDateString('en-US', { month: 'short' })} - ${new Date().getDate()} ${new Date().toLocaleDateString('en-US', { month: 'short' })}`;
+  document.getElementById('weekRange').textContent = weekRange;
+  
+  
+  if (chartInstance) {
+    chartInstance.destroy();
+  }
+  
+  
+  chartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: dates,
+      datasets: [
+        {
+          label: 'Tasks Completed',
+          data: taskData,
+          backgroundColor: 'rgba(182, 28, 28, 0.7)',
+          borderColor: 'rgba(182, 28, 28, 1)',
+          borderWidth: 1,
+          borderRadius: 4
+        },
+        {
+          label: 'Focus Sessions',
+          data: sessionData,
+          backgroundColor: 'rgba(59, 130, 246, 0.7)',
+          borderColor: 'rgba(59, 130, 246, 1)',
+          borderWidth: 1,
+          borderRadius: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'top',
+        }
+      }
+    }
+  });
+}
+
+function renderSessionHistory() {
+  const container = document.getElementById("sessionHistory");
+  const todaySessions = analytics[today]?.sessionHistory || [];
+  
+  if (todaySessions.length === 0) {
+    container.innerHTML = `
+      <div class="text-gray-500 text-center py-4">
+        No sessions today. Start your first timer!
+      </div>`;
+    return;
+  }
+  
+  container.innerHTML = todaySessions.slice(-5).reverse().map(session => {
+    const time = new Date(session.completedAt).toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    return `
+      <div class="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
+        <span class="text-gray-700">${time}</span>
+        <span class="font-medium text-red-700">${session.duration} min</span>
+        <span class="text-xs text-gray-500">Completed</span>
+      </div>
+    `;
+  }).join('');
+}
+
+
+function exportData() {
+  const data = {
+    tasks: tasks,
+    analytics: analytics,
+    exportedAt: new Date().toISOString()
+  };
+  
+  const dataStr = JSON.stringify(data, null, 2);
+  const dataBlob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(dataBlob);
+  
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `focusflow-data-${today}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  
+  alert('Data exported successfully!');
+}
+
+
+if ('Notification' in window && Notification.permission === 'default') {
+  Notification.requestPermission();
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderTasks();
+  updateTimerDisplay();
+  updateAnalytics();
+  renderSessionHistory();
+  setTimer(25); 
+});
+</script>
+
+</body>
+</html>
